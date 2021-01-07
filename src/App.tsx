@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import { Button } from 'antd';
+import React, { FC } from 'react';
+import './App.css';
 
-export default class App extends Component {
-    render() {
-        return (
-            <div>
-                <h1>1</h1>
-            </div>
-        )
-    }
-}
+const App: FC = () => (
+    <div className="App">
+        <Button type="primary">Button</Button>
+    </div>
+);
+
+export default App;

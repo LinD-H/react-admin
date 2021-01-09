@@ -14,12 +14,18 @@ const submitLayout = {
     wrapperCol: { offset: 10, span: 10 },
 };
 const onFinish = (values: any) => {
-    console.log('Success:', values);
+    console.log(values);
+
 };
 
 const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
 };
+const checkAccount = (value: string | number) => { // 这个是rules自定义的验证方法
+    return new Promise((resolve, reject) => {  // 返回一个promise
+
+    })
+}
 export default class login extends Component {
 
     render() {
@@ -38,11 +44,13 @@ export default class login extends Component {
                             initialValues={{ remember: true }}
                             onFinish={onFinish}
                             onFinishFailed={onFinishFailed}
-                        >   
+                        >
                             <Form.Item
                                 label="登录号"
                                 name="username"
-                                rules={[{ required: true, message: 'Please input your username!' }]}
+                                rules={[{ required: true, message: 'Please input your username!' },
+                                { min: 4, message: '用户名最少六位' },
+                                { max: 12, message: '用户名最多十二位' }]}
                             >
                                 <Input
                                     placeholder="Enter your username"
@@ -58,16 +66,27 @@ export default class login extends Component {
                             <Form.Item
                                 label="登录密"
                                 name="password"
-                                rules={[{ required: true, message: 'Please input your password!' }]}
+                                rules={[{ required: true, message: 'Please input your password!' },
+                                { min: 4, message: '用户密码最少六位' },
+                                { max: 12, message: '用户密码最多十二位' },
+                                { pattern: /^[a-zA-Z0-9]+$/, message: '用户密码必须是英文，数字组成' },
+                                {
+                                    // validator: (rule, value, callback) => {
+                                    //     checkAccount(value).then(res => {
+                                    //         if (res) {
+                                    //             // console.log(33, res)
+                                    //             callback()
+                                    //         } else {
+                                    //             callback('账号已存在')
+                                    //         }
+                                    //     })
+                                    // },
+                                },]}
                             >
-                                <Input
+                                <Input.Password
                                     placeholder="Enter your password"
                                     prefix={<DribbbleOutlined className="site-form-item-icon" />}
-                                    suffix={
-                                        <Tooltip title="输入密码啦还看看看">
-                                            <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
-                                        </Tooltip>
-                                    }
+
                                 />
                             </Form.Item>
 

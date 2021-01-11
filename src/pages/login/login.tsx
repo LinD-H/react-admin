@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import './login.css'
-import headImg from './image/2.jpg'
-import { Form, Input, Button, Checkbox, Tooltip } from 'antd';
-import { InfoCircleOutlined, UserOutlined, DribbbleOutlined } from '@ant-design/icons';
+import { DribbbleOutlined, InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Checkbox, Form, Input, Tooltip } from 'antd';
+import React, { Component } from 'react';
+import headImg from './image/2.jpg';
+import './login.css';
 const layout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 15 },
@@ -18,16 +18,19 @@ const onFinish = (values: any) => {
 
 };
 
-const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-};
-const checkAccount = (value: string | number) => { // 这个是rules自定义的验证方法
-    return new Promise((resolve, reject) => {  // 返回一个promise
+// const onFinishFailed = (errorInfo: any) => {
+//     console.log('Failed:', login);
+// };
+// const checkAccount = (value: string | number) => { // 这个是rules自定义的验证方法
+//     return new Promise((resolve, reject) => {  // 返回一个promise
 
-    })
-}
-export default class login extends Component {
+//     })
+// }
 
+export default class login extends Component<any, any> {
+    onFinishFailed = (errorInfo: any) => {
+        this.props.history.replace('/admin')
+    };
     render() {
         return (
             <div className="login">
@@ -43,7 +46,7 @@ export default class login extends Component {
                             name="basic"
                             initialValues={{ remember: true }}
                             onFinish={onFinish}
-                            onFinishFailed={onFinishFailed}
+                            onFinishFailed={this.onFinishFailed}
                         >
                             <Form.Item
                                 label="登录号"

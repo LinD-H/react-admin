@@ -2,6 +2,8 @@ import { DribbbleOutlined, InfoCircleOutlined, UserOutlined } from '@ant-design/
 import { Button, Checkbox, Form, Input, Tooltip } from 'antd';
 import React, { Component } from 'react';
 import headImg from './image/2.jpg';
+import storageUtils from '../../util/storageUtils'
+import memoryUtils from '../../util/memoryUtils'
 import './login.css';
 const layout = {
     labelCol: { span: 6 },
@@ -29,7 +31,15 @@ const onFinish = (values: any) => {
 
 export default class login extends Component<any, any> {
     onFinishFailed = (errorInfo: any) => {
-        this.props.history.replace('/admin')
+        const userName = 'dah'
+        memoryUtils.user.id = userName //在内存里面保存
+        storageUtils.saveUser(userName)
+        this.props.history.replace('/')
+    };
+    onFinish = (values: any) => {
+        this.props.history.replace('/admin') //跳转到主页
+        storageUtils.saveUser('user') //假装保存一下
+
     };
     render() {
         return (

@@ -1,5 +1,8 @@
 
 
-export const user = {
+const user = {
     id: ""
+}
+export default {
+    user
 }
